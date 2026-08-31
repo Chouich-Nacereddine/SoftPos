@@ -1,0 +1,26 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-server
+  security:
+    user:
+      name: eureka-admin # Spring Security Username
+      password: eureka-admin-password # Spring Security Password
+
+eureka:
+  instance:
+    hostname: localhost # The hostname of this Eureka instance is localhost So Eureka identifies itself using: localhost Combined with your port: 8761
+  client:
+    # This is the registry, so it shouldn't register with or fetch from itself
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #It's the Eureka API endpoint used by Eureka clients.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
