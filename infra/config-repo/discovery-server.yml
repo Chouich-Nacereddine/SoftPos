@@ -1,9 +1,4 @@
-server:
-  port: 8761
-
 spring:
-  application:
-    name: discovery-server
   security:
     user:
       name: eureka-admin # Spring Security Username
