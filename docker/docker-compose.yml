@@ -12,8 +12,34 @@ services:
       - ./keycloak:/opt/keycloak/data/import
     command: start-dev --import-realm
     networks:
-      - softpos-network
+      - softpos-net
+
+  discovery-server:
+    build:
+      context: ./infra/discovery-server
+      dockerfile: Dockerfile
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_PASSWORD=eureka-admin-password
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - softpos-net
+
+  config-server:
+    build:
+      context: ./infra/config-server
+    depends_on:
+      discovery-server:
+        condition: service_healthy   # won't start until Eureka is actually ready
+    networks:
+      - softpos-net
 
 networks:
-  softpos-network:
-    name: softpos-network
+  softpos-net:
+    driver: bridge

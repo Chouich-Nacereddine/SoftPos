@@ -3,7 +3,7 @@
 > Cloud-native, event-driven microservices platform turning an Android device into a software point-of-sale (tap-to-pay) terminal — built with Spring Boot, Keycloak, ISO 8583 and Apache Kafka.
 
 ![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-brightgreen)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.x-brightgreen)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-training%20project-yellow)
@@ -59,23 +59,23 @@ See the PDF spec for the full diagram, the communication matrix, and the reasoni
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
-| Language / runtime | Java 21, Spring Boot 3.3.x |
-| API gateway | Spring Cloud Gateway |
-| Service discovery | Netflix Eureka |
-| Centralized config | Spring Cloud Config |
-| Identity & access | Keycloak (OAuth2 / OIDC) |
-| Messaging | Apache Kafka (KRaft mode) |
-| ISO 8583 | jPOS |
-| Relational storage | PostgreSQL (one schema per service) |
-| Document storage | MongoDB (audit & reporting projections) |
-| Caching | Redis |
-| Secrets / key management | HashiCorp Vault (Transit engine as mock HSM) |
-| Resilience | Resilience4j |
-| Tracing | Micrometer Tracing + Zipkin |
-| Mobile client | Kotlin, Jetpack Compose, Android NFC Reader Mode |
-| Containerization | Docker / Docker Compose (local), Kubernetes-ready |
+| Layer                    | Technology                                        |
+| ------------------------ | ------------------------------------------------- |
+| Language / runtime       | Java 21, Spring Boot 3.3.x                        |
+| API gateway              | Spring Cloud Gateway                              |
+| Service discovery        | Netflix Eureka                                    |
+| Centralized config       | Spring Cloud Config                               |
+| Identity & access        | Keycloak (OAuth2 / OIDC)                          |
+| Messaging                | Apache Kafka (KRaft mode)                         |
+| ISO 8583                 | jPOS                                              |
+| Relational storage       | PostgreSQL (one schema per service)               |
+| Document storage         | MongoDB (audit & reporting projections)           |
+| Caching                  | Redis                                             |
+| Secrets / key management | HashiCorp Vault (Transit engine as mock HSM)      |
+| Resilience               | Resilience4j                                      |
+| Tracing                  | Micrometer Tracing + Zipkin                       |
+| Mobile client            | Kotlin, Jetpack Compose, Android NFC Reader Mode  |
+| Containerization         | Docker / Docker Compose (local), Kubernetes-ready |
 
 ## Repository structure
 
@@ -149,30 +149,30 @@ docker compose -f docker/docker-compose.yml up -d
 
 ## Services & ports
 
-| Service | Port | Notes |
-|---|---|---|
-| config-server | 8888 | must be first to start |
-| discovery-server (Eureka) | 8761 | dashboard at `/` |
-| api-gateway | 8080 | single public entry point |
-| keycloak | 8180 | admin console at `/admin` |
-| merchant-service | 8081 | |
-| device-service | 8082 | |
-| transaction-service | 8083 | saga orchestrator |
-| risk-service | 8084 | |
-| tokenization-service | 8085 | internal only — not exposed via gateway |
-| key-management-service | 8086 | internal only — not exposed via gateway |
-| iso8583-gateway-service | 8087 | HTTP admin API |
-| acquirer-mock-service | 8088 / 10000 | 8088 = admin API, 10000 = ISO 8583 TCP socket |
-| notification-service | 8089 | |
-| audit-service | 8090 | |
-| reconciliation-service | 8091 | |
-| reporting-service | 8092 | |
-| PostgreSQL | 5432 | one database per service |
-| Kafka | 9092 | KRaft mode, no Zookeeper |
-| Redis | 6379 | |
-| MongoDB | 27017 | |
-| Vault | 8200 | dev mode locally |
-| Zipkin | 9411 | trace UI |
+| Service                   | Port         | Notes                                         |
+| ------------------------- | ------------ | --------------------------------------------- |
+| config-server             | 8888         | must be first to start                        |
+| discovery-server (Eureka) | 8761         | dashboard at `/`                              |
+| api-gateway               | 8080         | single public entry point                     |
+| keycloak                  | 8180         | admin console at `/admin`                     |
+| merchant-service          | 8081         |                                               |
+| device-service            | 8082         |                                               |
+| transaction-service       | 8083         | saga orchestrator                             |
+| risk-service              | 8084         |                                               |
+| tokenization-service      | 8085         | internal only — not exposed via gateway       |
+| key-management-service    | 8086         | internal only — not exposed via gateway       |
+| iso8583-gateway-service   | 8087         | HTTP admin API                                |
+| acquirer-mock-service     | 8088 / 10000 | 8088 = admin API, 10000 = ISO 8583 TCP socket |
+| notification-service      | 8089         |                                               |
+| audit-service             | 8090         |                                               |
+| reconciliation-service    | 8091         |                                               |
+| reporting-service         | 8092         |                                               |
+| PostgreSQL                | 5432         | one database per service                      |
+| Kafka                     | 9092         | KRaft mode, no Zookeeper                      |
+| Redis                     | 6379         |                                               |
+| MongoDB                   | 27017        |                                               |
+| Vault                     | 8200         | dev mode locally                              |
+| Zipkin                    | 9411         | trace UI                                      |
 
 ## Running a single service
 
