@@ -1,4 +1,5 @@
 {
-    "snyk.advanced.autoSelectOrganization": true,
-    "java.configuration.updateBuildConfiguration": "interactive"
+  "snyk.advanced.autoSelectOrganization": true,
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "disabled"
 }

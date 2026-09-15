@@ -1,0 +1,15 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/discovery/eureka/
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: discovery-server # This routes all request with /discovery path to discovery-server for example localhost:8080/discovery will display the Eureka ui
+              uri: http://localhost:8761
+              predicates:
+                - Path=/discovery/**
