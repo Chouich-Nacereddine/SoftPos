@@ -1,8 +1,6 @@
-spring:
-  security:
-    user:
-      name: eureka-admin # Spring Security Username
-      password: eureka-admin-password # Spring Security Password
+server:
+  servlet:
+    context-path: /discovery
 
 eureka:
   instance:
