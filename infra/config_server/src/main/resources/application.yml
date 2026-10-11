@@ -6,7 +6,7 @@ spring:
     name: config-server
 
   profiles:
-    active: native
+    active: git
 
   cloud:
     config:
@@ -16,5 +16,9 @@ spring:
           search-locations: file:../config-repo
 
         # used when you want to use a git repository as a config source 'prod mode'
-        # git:
-        #   uri: https://github.com/Chouich-Nacereddine/SoftPos/tree/v.0.0.1/infra/config-repo
+        git:
+          uri: https://github.com/Chouich-Nacereddine/SoftPos.git
+          default-label: v.0.0.1
+          search-paths:
+            - infra/config-repo
+          clone-on-start: true

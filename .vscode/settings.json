@@ -1,5 +1,6 @@
 {
   "snyk.advanced.autoSelectOrganization": true,
   "java.configuration.updateBuildConfiguration": "interactive",
-  "java.compile.nullAnalysis.mode": "disabled"
+  "java.compile.nullAnalysis.mode": "disabled",
+  "cSpell.words": ["configserver", "softpos"]
 }
