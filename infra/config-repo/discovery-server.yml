@@ -1,8 +1,6 @@
-spring:
-  security:
-    user:
-      name: eureka-admin # Spring Security Username
-      password: eureka-admin-password # Spring Security Password
+server:
+  servlet:
+    context-path: /discovery
 
 eureka:
   instance:
@@ -13,6 +11,14 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #It's the Eureka API endpoint used by Eureka clients.
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/soft-pos
+          jwk-set-uri: http://keycloak:8080/realms/soft-pos/protocol/openid-connect/certs
 
 management:
   endpoints:

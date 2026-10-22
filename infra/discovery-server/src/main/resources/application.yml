@@ -1,9 +1,8 @@
 server:
   port: 8761
-
 spring:
   application:
     name: discovery-server
 
   config:
-    import: "configserver:http://localhost:8888"
+    import: "configserver:${CONFIG_SERVER_URL:http://localhost:8888}"

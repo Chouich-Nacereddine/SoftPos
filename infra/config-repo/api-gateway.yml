@@ -1,0 +1,38 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/discovery/eureka/
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: discovery-server # This routes all request with /discovery path to discovery-server for example localhost:8080/discovery will display the Eureka ui
+              uri: http://localhost:8761
+              predicates:
+                - Path=/discovery/**
+              filters:
+                - TokenRelay
+                - name: RewriteResponseHeader
+                  args:
+                    name: Location
+                    regexp: 'http://localhost:8761(/.*)'
+                    replacement: 'http://localhost:8080$1'
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: softpos-gateway
+            client-secret: ${KEYCLOAK_CLIENT_SECRET:Byt9IVP7Vs2FdY4c2eh1o0qp4IdQ4WaF}
+            authorization-grant-type: authorization_code
+            scope: openid,profile,email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8180/realms/soft-pos}
+
